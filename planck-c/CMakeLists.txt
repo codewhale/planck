@@ -4,7 +4,7 @@ project(planck C)
 set(CMAKE_BUILD_TYPE Release)
 
 # Uncomment to enable Clang Address Sanitizer
-#set (CMAKE_C_FLAGS "-fsanitize=address -O1 -fno-omit-frame-pointer")
+set (CMAKE_C_FLAGS "-fsanitize=address -O1 -fno-omit-frame-pointer")
 
 set(SOURCE_FILES
     archive.c
