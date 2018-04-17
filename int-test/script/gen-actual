@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -x
+
 #######################################################
 # Take a look at int-test/script/int-tests
 # instead. It is ClojureScript code instead of a big
