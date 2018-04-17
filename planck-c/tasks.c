@@ -12,7 +12,14 @@ int block_until_tasks_complete() {
 
     while (tasks_outstanding) {
         fprintf(stderr, "block_until_tasks_complete wait %d\n", tasks_outstanding);
-        err = pthread_cond_wait(&tasks_complete_cond, &tasks_complete_lock);
+
+        struct timespec ts;
+        clock_gettime(CLOCK_REALTIME, &ts);
+        ts.tv_sec += 5;
+        err = 0;
+        while (tasks_outstanding && err == 0) {
+            err = pthread_cond_timedwait(&tasks_complete_cond, &tasks_complete_lock, &ts);
+        }
         fprintf(stderr, "block_until_tasks_complete wait done %d %d\n", err, tasks_outstanding);
         if (err) {
             pthread_mutex_unlock(&tasks_complete_lock);
