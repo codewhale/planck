@@ -19,6 +19,7 @@ int block_until_tasks_complete() {
         err = 0;
         while (tasks_outstanding && err == 0) {
             err = pthread_cond_timedwait(&tasks_complete_cond, &tasks_complete_lock, &ts);
+            fprintf(stderr, "block_until_tasks_complete wait looping %d %d\n", err, tasks_outstanding);
         }
         fprintf(stderr, "block_until_tasks_complete wait done %d %d\n", err, tasks_outstanding);
         if (err) {
