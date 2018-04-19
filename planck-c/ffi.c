@@ -279,7 +279,7 @@ JSValueRef function_native_call(JSContextRef ctx, JSObjectRef function, JSObject
 
         JSValueRef rv = NULL;
         double temp;
-        switch (type_ints[i]) {
+        switch ((int)JSValueToNumber(ctx, args[1], NULL)) {
             case FFI_TYPE_UINT8:
                 temp = (double) *(unsigned char *) result;
                 rv = JSValueMakeNumber(ctx, temp);
